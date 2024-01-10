@@ -1,0 +1,48 @@
+.login {
+  max-width: 300px;
+  margin: auto;
+
+  &__title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+
+  &__form {
+    display: block;
+    flex-direction: column;
+  }
+
+  &__input {
+    height: 40px;
+    width: 100%;
+    border: 2px solid #bbb;
+    border-radius: 4px;
+    font-size: 12px;
+    outline: none;
+    line-height: inherit;
+    padding: 8px 15px;
+
+    &::placeholder {
+      color: inherit;
+    }
+  }
+
+  .error-message {
+    color: red;
+  }
+
+  &__input--wrapper {
+    margin-bottom: 20px;
+  }
+
+  &__input--error {
+    color: red;
+  }
+
+  @media (min-width: 768px) {
+    &__input {
+      font-size: 16px;
+    }
+  }
+}
