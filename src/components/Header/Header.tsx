@@ -12,7 +12,10 @@ const Header = () => {
   return (
     <>
       <div className="header">
-        <Link href={'/'}>
+        <Link
+          href={'/'}
+          className="header-heading"
+        >
           <div className="header-wrap">
             <Image
               className="header-logo"
