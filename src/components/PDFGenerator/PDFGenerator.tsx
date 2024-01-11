@@ -158,10 +158,11 @@ const PDFGenerator = ({ data }: { data: Partner[] }) => {
                   files.append('files', b.blob, b.id.toString());
                 });
 
-                await fetch('/api/invoices/many', {
-                  method: 'POST',
-                  body: files,
-                });
+                // await fetch('/api/invoices/many', {
+                //   method: 'POST',
+                //   body: files,
+                // });
+
                 zip.generateAsync({ type: 'blob' }).then(function (content) {
                   const downloadLink = document.createElement('a');
                   downloadLink.href = URL.createObjectURL(content);
