@@ -17,7 +17,7 @@ const PDFViewer = dynamic(() => import('../PDFViewer/PDFViewer'), {
   },
 });
 
-const PDFGenerator = ({ data, trips }: { data: Partner[]; trips: any }) => {
+const PDFGenerator = ({ data }: { data: Partner[] }) => {
   const [csvData, setCSVData] = useState<EntryType[]>([]);
   const [partner, setPartner] = useState<string>();
   const [partnerDataAndDB, setPartnerDataAndDB] = useState<{
