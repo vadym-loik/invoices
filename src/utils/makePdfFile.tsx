@@ -13,11 +13,11 @@ export async function makePdfFile(
       companyData={partnerDataFromDB}
     ></Invoice>
   );
-  //   ось тут ім'я
+
   const filename = `${
     partnerDataFromDB?.name || partnerData?.[0].Partenaire || 'default partner'
   }_${new Date().toISOString()}.pdf`;
-  //   робить блоб із файлом
+
   const z = await pdf(i).toBlob();
   return {
     blob: z,

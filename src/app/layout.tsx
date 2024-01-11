@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './index.scss';
 import { dosis } from '@/app/ui/fonts';
-import Head from 'next/head';
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import { ClerkProvider } from '@clerk/nextjs';

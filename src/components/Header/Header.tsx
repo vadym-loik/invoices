@@ -26,12 +26,12 @@ const Header = () => {
         <div className="header-nav">
           <nav>
             <ul className="header-nav__list">
-              {/* <li>
+              <li>
                 <Button
                   href="/"
                   text="Accueil"
                 />
-              </li> */}
+              </li>
               <li className="dropdown">
                 <Button
                   href="/admin"
