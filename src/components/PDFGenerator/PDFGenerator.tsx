@@ -207,16 +207,18 @@ const PDFGenerator = ({ data }: { data: Partner[] }) => {
                 >
                   Choisir partenaire
                 </option>
-                {uniquePartners?.map((partner, key) => {
-                  return (
-                    <option
-                      key={key}
-                      value={partner}
-                    >
-                      {partner?.toUpperCase()}
-                    </option>
-                  );
-                })}
+                {uniquePartners
+                  ?.filter((partner) => partner)
+                  .map((partner, key) => {
+                    return (
+                      <option
+                        key={key}
+                        value={partner}
+                      >
+                        {partner?.toUpperCase()}
+                      </option>
+                    );
+                  })}
               </select>
             </div>
           )}
