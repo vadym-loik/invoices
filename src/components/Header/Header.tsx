@@ -12,16 +12,18 @@ const Header = () => {
   return (
     <>
       <div className="header">
-        <div className="header-wrap">
-          <Image
-            className="header-logo"
-            width={30}
-            height={40}
-            src="/hopways_logo.webp"
-            alt="hopways logo"
-          />
-          <h1 className="header-heading">Hopways Facture</h1>
-        </div>
+        <Link href={'/'}>
+          <div className="header-wrap">
+            <Image
+              className="header-logo"
+              width={30}
+              height={40}
+              src="/hopways_logo.webp"
+              alt="hopways logo"
+            />
+            <h1 className="header-heading">Hopways Facture</h1>
+          </div>
+        </Link>
 
         <div className="header-nav">
           <nav>
