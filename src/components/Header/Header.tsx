@@ -26,12 +26,12 @@ const Header = () => {
         <div className="header-nav">
           <nav>
             <ul className="header-nav__list">
-              <li>
+              {/* <li>
                 <Button
                   href="/"
                   text="Accueil"
                 />
-              </li>
+              </li> */}
               <li className="dropdown">
                 <Button
                   href="/admin"
@@ -52,7 +52,7 @@ const Header = () => {
                   </Link>
                 </div>
               </li>
-              <li className="dropdown">
+              {/* <li className="dropdown">
                 <Button
                   href="/partner"
                   text="Partenaire"
@@ -71,7 +71,7 @@ const Header = () => {
                     Mes info
                   </Link>
                 </div>
-              </li>
+              </li> */}
               <li>
                 {userId ? (
                   <SignOutButton>
