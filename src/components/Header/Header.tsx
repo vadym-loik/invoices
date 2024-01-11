@@ -5,9 +5,18 @@ import { SignInButton } from '@clerk/nextjs';
 import { SignOutButton } from '@clerk/nextjs';
 import Button from './Button';
 import { auth } from '@clerk/nextjs';
+import { currentUser } from '@clerk/nextjs/server';
 
-const Header = () => {
+const Header = async () => {
   const { userId }: { userId: string | null } = auth();
+  const user = await currentUser();
+  const isNotAdmin =
+    !user ||
+    !user.privateMetadata ||
+    !('role' in user.privateMetadata) ||
+    ('role' in user.privateMetadata &&
+      typeof user.privateMetadata.role === 'string' &&
+      !user.privateMetadata.role.includes('admin'));
 
   return (
     <>
@@ -37,26 +46,28 @@ const Header = () => {
                   text="Accueil"
                 />
               </li>
-              <li className="dropdown">
-                <Button
-                  href="/admin"
-                  text="Admin"
-                />
-                <div className="dropdown-content">
-                  <Link
-                    className="dropdown-item"
-                    href="/admin/invoices"
-                  >
-                    Factures
-                  </Link>
-                  <Link
-                    className="dropdown-item"
-                    href="/admin/partners"
-                  >
-                    Partnaires
-                  </Link>
-                </div>
-              </li>
+              {isNotAdmin ? null : (
+                <li className="dropdown">
+                  <Button
+                    href="/admin"
+                    text="Admin"
+                  />
+                  <div className="dropdown-content">
+                    <Link
+                      className="dropdown-item"
+                      href="/admin/invoices"
+                    >
+                      Factures
+                    </Link>
+                    <Link
+                      className="dropdown-item"
+                      href="/admin/partners"
+                    >
+                      Partnaires
+                    </Link>
+                  </div>
+                </li>
+              )}
               {/* <li className="dropdown">
                 <Button
                   href="/partner"
