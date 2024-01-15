@@ -1,13 +1,14 @@
 import './partners.scss';
+import { getPartnerData } from '@/db/schema';
+import PartnerCard from '@/components/PartnerCard/PartnerCard';
 
-const Partners = () => {
+const Partner = async () => {
+  const data = await getPartnerData();
   return (
     <>
-      <div className="wrapper">
-        <h1>Partners</h1>
-      </div>
+      <PartnerCard data={data} />
     </>
   );
 };
 
-export default Partners;
+export default Partner;
