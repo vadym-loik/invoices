@@ -24,6 +24,7 @@ export function Row({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
+        fontSize: '10px',
       }}
     >
       <Text style={{ flex: 1, textAlign: 'center' }}>{dossier}</Text>
@@ -31,17 +32,15 @@ export function Row({
       <Text style={{ flex: 1, textAlign: 'center' }}>{date}</Text>
       <Text style={{ flex: 1, textAlign: 'center' }}>{driver}</Text>
       {priceWithoutTaxes !== undefined ? (
-        <Text style={{ flex: 1, textAlign: 'center' }}>{priceWithoutTaxes} €</Text>
-      ) : (
-        // <Text style={{ flex: 1, textAlign: 'center' }}></Text>
-        null
-      )}
+        <Text style={{ flex: 1, textAlign: 'center' }}>
+          {priceWithoutTaxes} €
+        </Text>
+      ) : // <Text style={{ flex: 1, textAlign: 'center' }}></Text>
+      null}
       {TVA !== undefined ? (
         <Text style={{ flex: 1, textAlign: 'center' }}>{TVA} %</Text>
-      ) : (
-        // <Text style={{ flex: 1, textAlign: 'center' }}></Text>
-        null
-      )}
+      ) : // <Text style={{ flex: 1, textAlign: 'center' }}></Text>
+      null}
       <Text style={{ flex: 1, textAlign: 'center' }}>{priceTTC} €</Text>
     </View>
   );

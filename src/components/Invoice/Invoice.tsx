@@ -81,8 +81,12 @@ const Invoice = ({
             return (
               <Row
                 key={e.Date}
-                dossier={e.Dossier}
-                statusMission={e['Statut mission']}
+                dossier={e['Nom client']
+                  .toLowerCase()
+                  .replace(/(^|\s)\S/g, (L) => L.toUpperCase())}
+                statusMission={
+                  e['Statut mission'] === 'Annulé' ? 'Annulée' : 'Terminée'
+                }
                 date={e.Date}
                 driver={(e['Nom chauffeur'] + ' ' + e['Prénom chauffeur'])
                   .toLowerCase()
@@ -118,7 +122,7 @@ const Invoice = ({
                 backgroundColor: '#f7eccd',
               }}
             >
-              Total: {totalOfDossiers} €
+              Total TTC: {totalOfDossiers} €
             </Cell>
           )}
         </View>
@@ -170,6 +174,13 @@ const Invoice = ({
               className="partner-info"
               style={{ maxWidth: '220px' }}
             >
+              <Text
+                style={{
+                  color: '#eece6e',
+                }}
+              >
+                {'Émetteur'}
+              </Text>
               <Text>{companyData?.name}</Text>
               <Text>{`Adresse : ${companyData?.address}`}</Text>
               <Text>{`N° Siret : ${companyData?.siret}`}</Text>
@@ -216,16 +227,16 @@ const Invoice = ({
                   }}
                 >
                   <Cell>{'Dossier'}</Cell>
-                  <Cell>{'Statut mission'}</Cell>
+                  <Cell>{'Statut'}</Cell>
                   <Cell>{'Date'}</Cell>
                   <Cell>{'Partenaire'}</Cell>
                   {typesWithTax.includes(companyData?.type ?? '') && (
-                    <Cell>{"Prix d'achat"}</Cell>
+                    <Cell>{'Prix HT'}</Cell>
                   )}
                   {typesWithTax.includes(companyData?.type ?? '') && (
                     <Cell>{'TVA'}</Cell>
                   )}
-                  <Cell>{"Prix d'achat"}</Cell>
+                  <Cell>{'Prix TTC'}</Cell>
                 </View>
               </View>
 
@@ -239,6 +250,7 @@ const Invoice = ({
               })}
               <View>
                 <View
+                  wrap={false}
                   style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -248,7 +260,7 @@ const Invoice = ({
                     backgroundColor: '#eece6e',
                   }}
                 >
-                  <Cell>{'Total à payer'}</Cell>
+                  <Cell>{'Total'}</Cell>
                   <Cell> </Cell>
                   <Cell> </Cell>
                   <Cell> </Cell>
