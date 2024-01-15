@@ -95,7 +95,7 @@ const Header = async () => {
                   </SignOutButton>
                 ) : (
                   <SignInButton>
-                    <span className="link">Connection</span>
+                    <span className="link">Connecxion</span>
                   </SignInButton>
                 )}
               </li>

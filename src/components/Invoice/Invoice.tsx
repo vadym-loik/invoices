@@ -66,7 +66,7 @@ const Invoice = ({
   const DossierGroup = ({ elements }: { elements: EntryType[] }) => {
     const totalOfDossiers = getTotalByGroupOfElements(elements);
     return (
-      <View>
+      <View style={{ marginBottom: '10pt' }}>
         {elements.map((e) => {
           const price = parseInt(e["Prix d'achat ht"], 10);
 
@@ -77,26 +77,24 @@ const Invoice = ({
             ? parseFloat((price * tax).toFixed(2))
             : undefined;
 
-          if (price !== 0) {
-            return (
-              <Row
-                key={e.Date}
-                dossier={e['Nom client']
-                  .toLowerCase()
-                  .replace(/(^|\s)\S/g, (L) => L.toUpperCase())}
-                statusMission={
-                  e['Statut mission'] === 'Annulé' ? 'Annulée' : 'Terminée'
-                }
-                date={e.Date}
-                driver={(e['Nom chauffeur'] + ' ' + e['Prénom chauffeur'])
-                  .toLowerCase()
-                  .replace(/(^|\s)\S/g, (L) => L.toUpperCase())}
-                priceWithoutTaxes={priceWithoutTaxes}
-                TVA={tva}
-                priceTTC={price}
-              />
-            );
-          }
+          return (
+            <Row
+              key={e.Date}
+              dossier={e['Nom client']
+                ?.toLowerCase()
+                .replace(/(^|\s)\S/g, (L) => L.toUpperCase())}
+              statusMission={
+                e['Statut mission'] === 'Annulé' ? 'Annulée' : 'Terminée'
+              }
+              date={e.Date}
+              // driver={(e['Nom chauffeur'] + ' ' + e['Prénom chauffeur'])
+              //   .toLowerCase()
+              //   .replace(/(^|\s)\S/g, (L) => L.toUpperCase())}
+              priceWithoutTaxes={priceWithoutTaxes}
+              TVA={tva}
+              priceTTC={price}
+            />
+          );
         })}
         <View
           style={{
@@ -229,7 +227,7 @@ const Invoice = ({
                   <Cell>{'Dossier'}</Cell>
                   <Cell>{'Statut'}</Cell>
                   <Cell>{'Date'}</Cell>
-                  <Cell>{'Partenaire'}</Cell>
+                  {/* <Cell>{'Partenaire'}</Cell> */}
                   {typesWithTax.includes(companyData?.type ?? '') && (
                     <Cell>{'Prix HT'}</Cell>
                   )}
@@ -263,7 +261,7 @@ const Invoice = ({
                   <Cell>{'Total'}</Cell>
                   <Cell> </Cell>
                   <Cell> </Cell>
-                  <Cell> </Cell>
+                  {/* <Cell> </Cell> */}
                   <Cell> </Cell>
                   <Cell> </Cell>
                   <Cell> </Cell>

@@ -72,16 +72,16 @@ const PDFGenerator = ({ data }: { data: Partner[] }) => {
       partnerDataAndDB.partnerDataFromDB
     );
 
-    await fetch(
-      `/api/invoices?partner=${partnerDataAndDB.partnerDataFromDB.id}`,
-      {
-        method: 'POST',
-        body: file.blob,
-        headers: {
-          'Content-Type': 'application/pdf',
-        },
-      }
-    );
+    // await fetch(
+    //   `/api/invoices?partner=${partnerDataAndDB.partnerDataFromDB.id}`,
+    //   {
+    //     method: 'POST',
+    //     body: file.blob,
+    //     headers: {
+    //       'Content-Type': 'application/pdf',
+    //     },
+    //   }
+    // );
 
     const downloadLink = document.createElement('a');
     downloadLink.href = URL.createObjectURL(file.blob);

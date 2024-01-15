@@ -5,7 +5,7 @@ export function Row({
   dossier,
   statusMission,
   date,
-  driver,
+  // driver,
   priceWithoutTaxes,
   TVA,
   priceTTC,
@@ -13,7 +13,7 @@ export function Row({
   dossier: string;
   statusMission: string;
   date: string;
-  driver: string;
+  // driver: string;
   priceWithoutTaxes: number | undefined;
   TVA: number | undefined;
   priceTTC: number;
@@ -30,7 +30,7 @@ export function Row({
       <Text style={{ flex: 1, textAlign: 'center' }}>{dossier}</Text>
       <Text style={{ flex: 1, textAlign: 'center' }}>{statusMission}</Text>
       <Text style={{ flex: 1, textAlign: 'center' }}>{date}</Text>
-      <Text style={{ flex: 1, textAlign: 'center' }}>{driver}</Text>
+      {/* <Text style={{ flex: 1, textAlign: 'center' }}>{driver}</Text> */}
       {priceWithoutTaxes !== undefined ? (
         <Text style={{ flex: 1, textAlign: 'center' }}>
           {priceWithoutTaxes} €

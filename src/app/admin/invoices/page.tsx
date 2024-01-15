@@ -15,6 +15,7 @@ const Home = async () => {
   const data = await getPartnerData();
   const user = await currentUser();
   const { userId } = auth();
+
   const isNotAdmin =
     !user ||
     !user.privateMetadata ||
@@ -25,7 +26,7 @@ const Home = async () => {
 
   if (!userId || isNotAdmin) {
     // redirect('/');
-    return <div>Sorry you do not have acces</div>;
+    return <div>{"Désolé, vous n'avez pas accès."}</div>;
   }
 
   return (
