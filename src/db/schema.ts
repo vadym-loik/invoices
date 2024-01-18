@@ -1,14 +1,15 @@
 import { int, mysqlTable, varchar, binary } from 'drizzle-orm/mysql-core';
 import { db } from '@/db/app';
-import { relations } from 'drizzle-orm';
+import { relations, eq } from 'drizzle-orm';
 // import { blob } from 'stream/consumers';
 
+// PARTNER queries
 export const partners = mysqlTable('partners', {
   id: int('id').notNull().primaryKey().autoincrement(),
   name: varchar('name', { length: 255 }).notNull().unique(),
-  address: varchar('address', { length: 255 }),
-  type: varchar('type', { length: 255 }),
-  siret: varchar('siret', { length: 255 }),
+  address: varchar('address', { length: 255 }).notNull(),
+  type: varchar('type', { length: 255 }).notNull(),
+  siret: varchar('siret', { length: 255 }).notNull(),
 });
 
 export type Partner = typeof partners.$inferSelect;
@@ -20,6 +21,28 @@ export async function getPartnerData(): Promise<Partner[]> {
   return result;
 }
 
+export async function getPartnerById(id: number): Promise<Partner> {
+  const result = await db.select().from(partners).where(eq(partners.id, id));
+  return result[0];
+}
+
+export async function updatePartnerById(
+  id: number,
+  name: string,
+  address: string,
+  type: string,
+  siret: string
+) {
+  const result = await db
+    .update(partners)
+    .set({ name, address, type, siret })
+    .where(eq(partners.id, id));
+  return result;
+}
+
+export async function deletePartnerById(id: number) {}
+
+// INVOICE queries
 export const invoices = mysqlTable('invoices', {
   id: int('id').notNull().primaryKey().autoincrement(),
   data: binary('data').notNull(),
