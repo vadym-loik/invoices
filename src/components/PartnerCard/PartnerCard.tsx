@@ -1,12 +1,14 @@
 import { Partner } from '@/db/schema';
 import './partnerCard.scss';
+import Link from 'next/link';
 
 const PartnerCard = ({ data }: { data: Partner[] }) => {
   return (
     <div className="list">
       {data.map((e) => {
         return (
-          <div
+          <Link
+            href={`partners/${e.id}`}
             key={e.id}
             className="partner"
           >
@@ -16,7 +18,7 @@ const PartnerCard = ({ data }: { data: Partner[] }) => {
               <p>Type : {e.type}</p>
               <p>SIRET : {e.siret}</p>
             </div>
-          </div>
+          </Link>
         );
       })}
     </div>
