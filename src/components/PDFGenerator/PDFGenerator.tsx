@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import Papa from 'papaparse';
 import { useEffect, useState } from 'react';
 import './pdfGenerator.scss';
+import { checkPartner } from '@/utils/verify';
 
 const PDFViewer = dynamic(() => import('../PDFViewer/PDFViewer'), {
   ssr: false,
@@ -71,6 +72,12 @@ const PDFGenerator = ({ data }: { data: Partner[] }) => {
       partnerDataAndDB.partnerData,
       partnerDataAndDB.partnerDataFromDB
     );
+
+    if (!file) {
+      setLoading(false);
+
+      return;
+    }
 
     // await fetch(
     //   `/api/invoices?partner=${partnerDataAndDB.partnerDataFromDB.id}`,
@@ -154,6 +161,7 @@ const PDFGenerator = ({ data }: { data: Partner[] }) => {
                 const files = new FormData();
 
                 blobs.forEach((b) => {
+                  if (!b) return;
                   zip.file(b.filename, b.blob);
                   files.append('files', b.blob, b.id.toString());
                 });
@@ -224,25 +232,38 @@ const PDFGenerator = ({ data }: { data: Partner[] }) => {
             </div>
           )}
 
-          {partner !== undefined && (
-            <button
-              className="home-btn"
-              onClick={handleDownload}
-              disabled={loading}
-            >
-              {loading ? 'Veiullez attendre...' : 'Telecharger'}
-            </button>
-          )}
+          {partner !== undefined ? (
+            checkPartner(partnerDataAndDB?.partnerDataFromDB) ? (
+              <button
+                className="home-btn"
+                onClick={handleDownload}
+                disabled={loading}
+              >
+                {loading ? 'Veiullez attendre...' : 'Telecharger'}
+              </button>
+            ) : null
+          ) : null}
         </div>
       </form>
-      {partner !== undefined && (
-        <PDFViewer>
-          <Invoice
-            data={partnerDataAndDB?.partnerData}
-            companyData={partnerDataAndDB?.partnerDataFromDB}
-          ></Invoice>
-        </PDFViewer>
-      )}
+
+      {partner !== undefined ? (
+        checkPartner(partnerDataAndDB?.partnerDataFromDB) ? (
+          <PDFViewer>
+            <Invoice
+              data={partnerDataAndDB?.partnerData}
+              companyData={partnerDataAndDB?.partnerDataFromDB}
+            ></Invoice>
+          </PDFViewer>
+        ) : (
+          <div>
+            <p>
+              Elles nous manquent des données de partenaire dans la base de
+              données...
+            </p>
+            <p>Veuillez verifier et ajouter si necessaire.</p>
+          </div>
+        )
+      ) : null}
     </>
   );
 };
