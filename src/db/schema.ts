@@ -26,13 +26,19 @@ export async function getPartnerById(id: number): Promise<Partner> {
   return result[0];
 }
 
-export async function updatePartnerById(
-  id: number,
-  name: string,
-  address: string,
-  type: string,
-  siret: string
-) {
+export async function updatePartnerById({
+  id,
+  name,
+  address,
+  type,
+  siret,
+}: {
+  id: number;
+  name: string;
+  address: string;
+  type: string;
+  siret: string;
+}) {
   const result = await db
     .update(partners)
     .set({ name, address, type, siret })
@@ -40,7 +46,23 @@ export async function updatePartnerById(
   return result;
 }
 
-export async function deletePartnerById(id: number) {}
+export async function deletePartnerById(id: number) {
+  await db.delete(partners).where(eq(partners.id, id));
+}
+
+export async function addPartner({
+  name,
+  address,
+  type,
+  siret,
+}: {
+  name: string;
+  address: string;
+  type: string;
+  siret: string;
+}) {
+  await db.insert(partners).values({ name, address, siret, type });
+}
 
 // INVOICE queries
 export const invoices = mysqlTable('invoices', {
