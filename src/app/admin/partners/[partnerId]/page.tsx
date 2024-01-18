@@ -1,108 +1,15 @@
-'use client';
-import { getPartnerById, updatePartnerById } from '@/db/schema';
+import { getPartnerById } from '@/db/schema';
 import './partnerId.scss';
-import React, { useCallback, useEffect, useState } from 'react';
-import { Partner } from '@/db/schema';
+import React from 'react';
+import EditPartnerForm from './EditPartnerForm';
+import Link from 'next/link';
+import DeletePartner from './DeletePartner';
 
-interface EditPartnerFormProps {
-  partner: Partner;
-  onUpdate: () => void;
-}
-
-const EditPartnerForm: React.FC<EditPartnerFormProps> = ({
-  partner,
-  onUpdate,
-}) => {
-  const [editedPartner, setEditedPartner] = useState<Partner>({ ...partner });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEditedPartner((prevPartner) => ({ ...prevPartner, [name]: value }));
-  };
-
-  const handleUpdate = async () => {
-    await updatePartnerById(
-      editedPartner.id,
-      editedPartner.address,
-      editedPartner.name,
-      editedPartner.siret,
-      editedPartner.type
-    );
-    onUpdate(); // Trigger a callback to refresh partner data in the parent component
-  };
-
-  return (
-    <div>
-      <h2>Edit Partner Information</h2>
-      <form>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={editedPartner.name}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Address:
-          <input
-            type="text"
-            name="address"
-            value={editedPartner.address}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Type:
-          <input
-            type="text"
-            name="type"
-            value={editedPartner.type}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Siret:
-          <input
-            type="text"
-            name="siret"
-            value={editedPartner.siret}
-            onChange={handleChange}
-          />
-        </label>
-        <button
-          type="button"
-          onClick={handleUpdate}
-        >
-          Update Partner
-        </button>
-      </form>
-    </div>
-  );
-};
-
-const Partner: React.FC<{ params: { partnerId: number } }> = ({ params }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [partner, setPartner] = useState<Partner | null>(null);
-
-  const fetchPartner = useCallback(async () => {
-    const partner = await getPartnerById(params.partnerId);
-    setPartner(partner);
-  }, [params.partnerId]);
-
-  useEffect(() => {
-    fetchPartner();
-  }, [fetchPartner]);
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleUpdate = () => {
-    setIsEditing(false);
-    fetchPartner();
-  };
+const PartnerPage: React.FC<{
+  params: { partnerId: number };
+  searchParams: { editing?: string };
+}> = async ({ params, searchParams }) => {
+  const partner = await getPartnerById(params.partnerId);
 
   if (!partner) {
     return <div>Partner not found</div>;
@@ -116,16 +23,19 @@ const Partner: React.FC<{ params: { partnerId: number } }> = ({ params }) => {
         <p>{partner.type}</p>
         <p>{partner.siret}</p>
       </div>
-      {isEditing ? (
-        <EditPartnerForm
-          partner={partner}
-          onUpdate={handleUpdate}
-        />
+      {searchParams.editing ? (
+        <EditPartnerForm partner={partner} />
       ) : (
-        <button onClick={handleEditClick}>Edit Partner</button>
+        <Link
+          href={`/admin/partners/${params.partnerId}?editing=true`}
+          prefetch={false}
+        >
+          Edit Partner
+        </Link>
       )}
+      <DeletePartner id={params.partnerId} />
     </div>
   );
 };
 
-export default Partner;
+export default PartnerPage;
