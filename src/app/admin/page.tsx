@@ -1,5 +1,4 @@
 import './admin.scss';
-import Link from 'next/link';
 
 const Admin = () => {
   return (
