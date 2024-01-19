@@ -2,6 +2,7 @@ import React from 'react';
 import { Partner } from '@/db/schema';
 import handleUpdate from './action';
 import './partnerId.scss';
+import SubmitButton from '@/components/SubmitButton/SubmitButton';
 
 interface EditPartnerFormProps {
   partner: Partner;
@@ -57,12 +58,12 @@ const EditPartnerForm: React.FC<EditPartnerFormProps> = ({ partner }) => {
             defaultValue={partner.siret}
           />
         </label>
-        <button
+        <SubmitButton
           className="edit-btn"
           type="submit"
         >
           Partenaire de mise à jour
-        </button>
+        </SubmitButton>
       </form>
     </div>
   );

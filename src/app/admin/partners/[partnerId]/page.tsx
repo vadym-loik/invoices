@@ -5,6 +5,8 @@ import EditPartnerForm from './EditPartnerForm';
 import Link from 'next/link';
 import DeletePartner from './DeletePartner';
 
+export const revalidate = 0;
+
 const PartnerPage: React.FC<{
   params: { partnerId: number };
   searchParams: { editing?: string };

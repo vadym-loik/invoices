@@ -75,4 +75,10 @@
     border: none;
     cursor: pointer;
   }
+
+  &-btn:disabled {
+    background-color: #45a04981;
+    color: #f44336;
+    cursor: auto;
+  }
 }

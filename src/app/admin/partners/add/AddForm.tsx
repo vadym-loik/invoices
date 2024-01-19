@@ -1,4 +1,5 @@
 import addPartnerAction from './action';
+import SubmitButton from '@/components/SubmitButton/SubmitButton';
 
 export default function AddForm() {
   return (
@@ -48,12 +49,12 @@ export default function AddForm() {
             placeholder="No. SIRET"
           />
         </label>
-        <button
+        <SubmitButton
           className="edit-btn"
           type="submit"
         >
           Ajouter Partnaire
-        </button>
+        </SubmitButton>
       </form>
     </div>
   );
