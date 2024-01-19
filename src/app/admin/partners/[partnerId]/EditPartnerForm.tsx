@@ -1,6 +1,7 @@
 import React from 'react';
 import { Partner } from '@/db/schema';
 import handleUpdate from './action';
+import './partnerId.scss';
 
 interface EditPartnerFormProps {
   partner: Partner;
@@ -10,12 +11,16 @@ const EditPartnerForm: React.FC<EditPartnerFormProps> = ({ partner }) => {
   const action = handleUpdate.bind(null, partner.id);
 
   return (
-    <div>
-      <h2>Edit Partner Information</h2>
-      <form action={action}>
+    <div className="edit">
+      <h2 className="edit-title">Edit Partner Information</h2>
+      <form
+        className="edit-form"
+        action={action}
+      >
         <label>
-          Name:
+          {'Nom: '}
           <input
+            className="edit-input"
             required
             type="text"
             name="name"
@@ -23,8 +28,9 @@ const EditPartnerForm: React.FC<EditPartnerFormProps> = ({ partner }) => {
           />
         </label>
         <label>
-          Address:
+          {'Adresse: '}
           <input
+            className="edit-input"
             required
             type="text"
             name="address"
@@ -32,8 +38,9 @@ const EditPartnerForm: React.FC<EditPartnerFormProps> = ({ partner }) => {
           />
         </label>
         <label>
-          Type:
+          {'Type: '}
           <input
+            className="edit-input"
             required
             type="text"
             name="type"
@@ -41,15 +48,21 @@ const EditPartnerForm: React.FC<EditPartnerFormProps> = ({ partner }) => {
           />
         </label>
         <label>
-          Siret:
+          {'SIRET: '}
           <input
+            className="edit-input"
             required
             type="text"
             name="siret"
             defaultValue={partner.siret}
           />
         </label>
-        <button type="submit">Update Partner</button>
+        <button
+          className="edit-btn"
+          type="submit"
+        >
+          Partenaire de mise à jour
+        </button>
       </form>
     </div>
   );

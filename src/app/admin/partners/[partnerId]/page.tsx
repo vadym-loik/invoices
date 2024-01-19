@@ -12,7 +12,7 @@ const PartnerPage: React.FC<{
   const partner = await getPartnerById(params.partnerId);
 
   if (!partner) {
-    return <div>Partner not found</div>;
+    return <div>Partenaire non trouvé</div>;
   }
 
   return (
@@ -27,10 +27,11 @@ const PartnerPage: React.FC<{
         <EditPartnerForm partner={partner} />
       ) : (
         <Link
+          className="partner-link"
           href={`/admin/partners/${params.partnerId}?editing=true`}
           prefetch={false}
         >
-          Edit Partner
+          Éditer partenaire
         </Link>
       )}
       <DeletePartner id={params.partnerId} />

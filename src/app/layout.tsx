@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="fr">
         <body className={`${dosis.className}`}>
           <main className="container">
             <Header />

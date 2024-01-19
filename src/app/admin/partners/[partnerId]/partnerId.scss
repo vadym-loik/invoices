@@ -2,8 +2,77 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 50px;
   width: 50%;
-  background-color: #f2f2f2;
+  background-color: #fff;
   padding: 20px;
   border-radius: 5px;
+}
+
+.partner-heading {
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.partner-info > p {
+  margin-bottom: 10px;
+}
+
+.partner-link {
+  background-color: #45a049;
+  width: 100%;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.partner-link:hover,
+.partner-link:active {
+  background-color: #45a049;
+  color: white;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  width: 100%;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.edit {
+  &-title {
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  &-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  &-btn {
+    background-color: #45a049;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+  }
 }

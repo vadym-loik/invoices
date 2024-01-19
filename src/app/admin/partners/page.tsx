@@ -9,13 +9,16 @@ const Partner = async () => {
   const data = await getPartnerData();
   return (
     <>
-      <Link
-        href={'/admin/partners/add'}
-        prefetch={false}
-      >
-        Ajouter un Partenaire
-      </Link>
-      <PartnerCard data={data} />
+      <div className="add">
+        <Link
+          href={'/admin/partners/add'}
+          prefetch={false}
+          className="add-link"
+        >
+          Ajouter un Partenaire
+        </Link>
+        <PartnerCard data={data} />
+      </div>
     </>
   );
 };

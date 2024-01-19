@@ -8,7 +8,7 @@ export default async function AddPartnerPage({
   return (
     <div>
       {searchParams.success ? (
-        <div>
+        <div className="wrapper">
           <p>{"Vous vennez d'ajouter un partenaire"}</p>
           <Link
             href={'/admin/partners'}

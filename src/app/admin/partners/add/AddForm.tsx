@@ -2,12 +2,16 @@ import addPartnerAction from './action';
 
 export default function AddForm() {
   return (
-    <div>
-      <h2>Ajouter un nouveau Partenaire</h2>
-      <form action={addPartnerAction}>
+    <div className="partner-view">
+      <h2 className="partner-heading">Ajouter un nouveau Partenaire</h2>
+      <form
+        className="edit-form"
+        action={addPartnerAction}
+      >
         <label>
           Nom:
           <input
+            className="edit-input"
             required
             type="text"
             name="name"
@@ -17,6 +21,7 @@ export default function AddForm() {
         <label>
           Addresse:
           <input
+            className="edit-input"
             required
             type="text"
             name="address"
@@ -26,6 +31,7 @@ export default function AddForm() {
         <label>
           Type:
           <input
+            className="edit-input"
             required
             type="text"
             name="type"
@@ -35,13 +41,19 @@ export default function AddForm() {
         <label>
           Siret:
           <input
+            className="edit-input"
             required
             type="text"
             name="siret"
             placeholder="No. SIRET"
           />
         </label>
-        <button type="submit">Ajouter Partnaire</button>
+        <button
+          className="edit-btn"
+          type="submit"
+        >
+          Ajouter Partnaire
+        </button>
       </form>
     </div>
   );

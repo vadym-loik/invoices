@@ -1,4 +1,5 @@
 'use client';
+import './partnerId.scss';
 import { deletePartner } from './action';
 import { useState } from 'react';
 
@@ -8,7 +9,12 @@ export default function DeletePartner({ id }: { id: number }) {
   return (
     <>
       {!deleteP ? (
-        <button onClick={() => setDeleteP(true)}>Delete this partner</button>
+        <button
+          className="delete-btn"
+          onClick={() => setDeleteP(true)}
+        >
+          Supprimer le partenaire
+        </button>
       ) : (
         <div>
           Are you sure ?
