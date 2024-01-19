@@ -1,5 +1,6 @@
 import addPartnerAction from './action';
 import SubmitButton from '@/components/SubmitButton/SubmitButton';
+import '../[partnerId]/partnerId.scss';
 
 export default function AddForm() {
   return (
