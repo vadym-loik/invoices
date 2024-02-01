@@ -22,8 +22,8 @@ const Invoice = ({
   const year = date.getFullYear();
   const invoiceNumber = `Facture #${monthNumber}/${year}`;
 
-  console.log(data);
-  console.log(companyData);
+  // console.log(data);
+  // console.log(companyData);
 
   // Assuming data is sorted in ascending order by date
   const firstEntryDate =
@@ -70,11 +70,11 @@ const Invoice = ({
         {elements.map((e) => {
           const price = parseInt(e["Prix d'achat ht"], 10);
 
-          const tax = shouldBeTaxed ? 0.9 : 1.0;
+          const tax = shouldBeTaxed ? 10 / 110 : 1.0;
           const tva = shouldBeTaxed ? 10 : undefined;
 
           const priceWithoutTaxes = shouldBeTaxed
-            ? parseFloat((price * tax).toFixed(2))
+            ? parseFloat((price - price * tax).toFixed(2))
             : undefined;
 
           return (
