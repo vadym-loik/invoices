@@ -17,7 +17,7 @@ const Invoice = ({
   companyData?: Partner;
 }) => {
   const date = makeDate(data ? data[0]['Date'] : undefined);
-  // const currentDate = new Date();
+
   const monthNumber = date.getMonth() + 1;
   const year = date.getFullYear();
   const invoiceNumber = `Facture #${monthNumber}/${year}`;
@@ -54,13 +54,14 @@ const Invoice = ({
     companyData.type !== null &&
     typesWithTax.includes(companyData.type);
 
-  // const tax: number = 0.9 || 1.0;
   const byDossier = data ? groupBy(data, 'Dossier') : {};
 
   const getTotalByGroupOfElements = (data: EntryType[]) => {
-    return data.reduce((a, c) => {
-      return a + parseInt(c["Prix d'achat ht"], 10);
-    }, 0);
+    return data
+      .reduce((a, c) => {
+        return a + parseFloat(c["Prix d'achat ht"]);
+      }, 0)
+      .toFixed(2);
   };
 
   const DossierGroup = ({ elements }: { elements: EntryType[] }) => {
@@ -68,7 +69,7 @@ const Invoice = ({
     return (
       <View style={{ marginBottom: '10pt' }}>
         {elements.map((e) => {
-          const price = parseInt(e["Prix d'achat ht"], 10);
+          const price = parseFloat(e["Prix d'achat ht"]);
 
           const tax = shouldBeTaxed ? 10 / 110 : 1.0;
           const tva = shouldBeTaxed ? 10 : undefined;
@@ -87,9 +88,6 @@ const Invoice = ({
                 e['Statut mission'] === 'Annulé' ? 'Annulée' : 'Terminée'
               }
               date={e.Date}
-              // driver={(e['Nom chauffeur'] + ' ' + e['Prénom chauffeur'])
-              //   .toLowerCase()
-              //   .replace(/(^|\s)\S/g, (L) => L.toUpperCase())}
               priceWithoutTaxes={priceWithoutTaxes}
               TVA={tva}
               priceTTC={price}
@@ -106,14 +104,15 @@ const Invoice = ({
           <Cell></Cell>
           <Cell></Cell>
           <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          <Cell></Cell>
-          {totalOfDossiers > 0 && (
+          {/* <Cell></Cell> */}
+          {/* <Cell></Cell> */}
+          {/* <Cell></Cell>
+          <Cell></Cell> */}
+          {+totalOfDossiers > 0 && (
             <Cell
               wrap={false}
               style={{
+                fontSize: '10pt',
                 borderRadius: '5px',
                 margin: '5px',
                 padding: '5px',
@@ -129,8 +128,9 @@ const Invoice = ({
   };
 
   const newTotal = Object.values(byDossier)
-    .map(getTotalByGroupOfElements) // [100,125,50,46]
-    .reduce((a, c) => a + c, 0); // 100+125+50+46
+    .map(getTotalByGroupOfElements)
+    .reduce((a, c) => a + parseFloat(c), 0)
+    .toFixed(2);
 
   return (
     <Document>
@@ -227,7 +227,6 @@ const Invoice = ({
                   <Cell>{'Dossier'}</Cell>
                   <Cell>{'Statut'}</Cell>
                   <Cell>{'Date'}</Cell>
-                  {/* <Cell>{'Partenaire'}</Cell> */}
                   {typesWithTax.includes(companyData?.type ?? '') && (
                     <Cell>{'Prix HT'}</Cell>
                   )}
@@ -261,7 +260,6 @@ const Invoice = ({
                   <Cell>{'Total'}</Cell>
                   <Cell> </Cell>
                   <Cell> </Cell>
-                  {/* <Cell> </Cell> */}
                   <Cell> </Cell>
                   <Cell> </Cell>
                   <Cell> </Cell>
