@@ -22,7 +22,10 @@ const Invoice = ({
   const year = date.getFullYear();
   const invoiceNumber = `Facture #${monthNumber}/${year}`;
 
-  // console.log(data);
+  // console.log(
+  //   'Prices',
+  //   data?.map((e) => Number.parseFloat(e["Prix d'achat ht"].replace(',', '.')))
+  // );
   // console.log(companyData);
 
   // Assuming data is sorted in ascending order by date
@@ -59,7 +62,7 @@ const Invoice = ({
   const getTotalByGroupOfElements = (data: EntryType[]) => {
     return data
       .reduce((a, c) => {
-        return a + parseFloat(c["Prix d'achat ht"]);
+        return a + parseFloat(c["Prix d'achat ht"].replace(',', '.'));
       }, 0)
       .toFixed(2);
   };
@@ -69,7 +72,7 @@ const Invoice = ({
     return (
       <View style={{ marginBottom: '10pt' }}>
         {elements.map((e) => {
-          const price = parseFloat(e["Prix d'achat ht"]);
+          const price = parseFloat(e["Prix d'achat ht"].replace(',', '.'));
 
           const tax = shouldBeTaxed ? 10 / 110 : 1.0;
           const tva = shouldBeTaxed ? 10 : undefined;
